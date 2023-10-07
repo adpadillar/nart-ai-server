@@ -2,8 +2,11 @@
 import torch
 from torch import autocast
 from diffusers import StableDiffusionPipeline
+
+# model = "CompVis/stable-diffusion-v1-4"   # default stable diffusion model
+model = "OFA-Sys/small-stable-diffusion-v0" # small stable diffusion model
  
-pipe = StableDiffusionPipeline.from_pretrained("CompVis/stable-diffusion-v1-4", revision="fp16", torch_dtype=torch.float16)
+pipe = StableDiffusionPipeline.from_pretrained(model, revision="fp16", torch_dtype=torch.float16)
  
 pipe.to("cuda")
  
