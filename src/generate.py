@@ -22,5 +22,6 @@ def generate(prompt: str):
         buffered = BytesIO()
         image.save(buffered, format="JPEG")
         img_str = base64.b64encode(buffered.getvalue())
+        base64_img_str = img_str.decode("utf-8")
 
-        return img_str
+        return 'data:image/jpg;base64,' + base64_img_str
