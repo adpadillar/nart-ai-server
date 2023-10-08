@@ -12,7 +12,7 @@ def generate_handler():
     if not prompt:
         return "Missing prompt", 400
 
-    sleep(2)
+    # sleep(2)
 
     return {
         "prompt": prompt,
