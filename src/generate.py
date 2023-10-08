@@ -5,7 +5,6 @@ from diffusers import StableDiffusionPipeline
 from io import BytesIO
 import base64
 
-output = BytesIO()
 
 MODEL = "CompVis/stable-diffusion-v1-4"
 
@@ -20,10 +19,11 @@ def generate(prompt: str):
         output = pipe(prompt)
     for image in output.images:
         # base64 encode image
+        output = BytesIO()
         image.save(output, format="JPEG")
         image_data = output.getvalue()
         base_64_image = base64.b64encode(image_data)
-        if not isinstance(image_data, str):
+        if not isinstance(base_64_image, str):
             # Python 3, decode from bytes to string
             image_data = image_data.decode()
         data_url = 'data:image/jpg;base64,' + image_data
