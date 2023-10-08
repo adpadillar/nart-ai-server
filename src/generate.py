@@ -8,19 +8,20 @@ import base64
 
 MODEL = "CompVis/stable-diffusion-v1-4"
 warm = False
+pipe = None
 
 
 def prepPipeline():
     global warm
+    global pipe
 
-    if warm:
-        return pipe
-    pipe = StableDiffusionPipeline.from_pretrained(
-        MODEL, revision="fp16", torch_dtype=torch.float16)
+    if not warm:
+        pipe = StableDiffusionPipeline.from_pretrained(
+            MODEL, revision="fp16", torch_dtype=torch.float16)
 
-    pipe.to("cuda")
+        pipe.to("cuda")
 
-    warm = True
+        warm = True
 
     return pipe
 
