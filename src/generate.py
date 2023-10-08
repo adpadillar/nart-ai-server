@@ -7,13 +7,26 @@ import base64
 
 
 MODEL = "CompVis/stable-diffusion-v1-4"
+warm = False
 
 
-def generate(prompt: str):
+def prepPipeline():
+    global warm
+
+    if warm:
+        return pipe
     pipe = StableDiffusionPipeline.from_pretrained(
         MODEL, revision="fp16", torch_dtype=torch.float16)
 
     pipe.to("cuda")
+
+    warm = True
+
+    return pipe
+
+
+def generate(prompt: str):
+    pipe = prepPipeline()
 
     with autocast("cuda"):
         output = pipe(prompt)
