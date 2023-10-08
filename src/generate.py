@@ -19,13 +19,8 @@ def generate(prompt: str):
         output = pipe(prompt)
     for image in output.images:
         # base64 encode image
-        output = BytesIO()
-        image.save(output, format="JPEG")
-        image_data = output.getvalue()
-        base_64_image = base64.b64encode(image_data)
-        if not isinstance(base_64_image, str):
-            # Python 3, decode from bytes to string
-            image_data = image_data.decode()
-        data_url = 'data:image/jpg;base64,' + image_data
+        buffered = BytesIO()
+        image.save(buffered, format="JPEG")
+        img_str = base64.b64encode(buffered.getvalue())
 
-        return data_url
+        return img_str
