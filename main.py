@@ -1,5 +1,5 @@
 from flask import Flask, request
-from time import sleep
+from src.generate import generate
 
 
 app = Flask(__name__)
@@ -12,10 +12,8 @@ def generate_handler():
     if not prompt:
         return "Missing prompt", 400
 
-    # sleep(2)
-
     return {
-        "prompt": prompt,
+        "prompt": generate(prompt),
         "generated": "This is a generated response",
     }
 
