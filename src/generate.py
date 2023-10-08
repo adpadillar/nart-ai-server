@@ -38,4 +38,4 @@ def generate(prompt: str):
         img_str = base64.b64encode(buffered.getvalue())
         base64_img_str = img_str.decode("utf-8")
 
-        return 'data:image/jpg;base64,' + base64_img_str
+        return base64_img_str
