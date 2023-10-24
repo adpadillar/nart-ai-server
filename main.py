@@ -13,8 +13,8 @@ def generate_handler():
         return "Missing prompt", 400
 
     return {
-        "prompt": generate(prompt),
-        "generated": "This is a generated response",
+        "prompt": prompt,
+        "image": generate(prompt),
     }
 
 
