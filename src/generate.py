@@ -20,6 +20,7 @@ def prepPipeline():
             MODEL, revision="fp16", torch_dtype=torch.float16)
 
         pipe.to("cuda")
+        pipe.safety_checker = lambda images, clip_input: (images, False)
 
         warm = True
 
