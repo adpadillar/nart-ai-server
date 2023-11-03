@@ -12,8 +12,6 @@ def generate_handler():
     width = request.args.get("w")
     steps = request.args.get("s")
 
-    print(prompt, height, width, steps)
-
     if height == None:
         height = 512
 
