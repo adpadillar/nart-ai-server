@@ -32,7 +32,7 @@ def generate(prompt: str):
     pipe = prepPipeline()
 
     with autocast("cuda"):
-        output = pipe(prompt)
+        output = pipe(prompt, height=1024, width=1024)
     for image in output.images:
         # base64 encode image
         buffered = BytesIO()
