@@ -26,7 +26,7 @@ def generate_handler():
 
     return {
         "prompt": prompt,
-        "image": generate(prompt, height, width, steps),
+        "image": generate(prompt, int(height), int(width), int(steps)),
     }
 
 
