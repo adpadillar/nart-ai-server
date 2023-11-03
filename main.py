@@ -14,13 +14,13 @@ def generate_handler():
 
     print(prompt, height, width, steps)
 
-    if not height:
+    if height == None:
         height = 512
 
-    if not width:
+    if width == None:
         width = 512
 
-    if not steps:
+    if steps == None:
         steps = 50
 
     if not prompt:
