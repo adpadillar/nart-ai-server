@@ -8,13 +8,25 @@ app = Flask(__name__)
 @app.route("/generate", methods=["GET"])
 def generate_handler():
     prompt = request.args.get("prompt")
+    height = request.args.get("h")
+    width = request.args.get("w")
+    steps = request.args.get("s")
+
+    if not height:
+        height = 512
+
+    if not width:
+        width = 512
+
+    if not steps:
+        steps = 50
 
     if not prompt:
         return "Missing prompt", 400
 
     return {
         "prompt": prompt,
-        "image": generate(prompt),
+        "image": generate(prompt, height, width, steps),
     }
 
 

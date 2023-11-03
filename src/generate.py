@@ -28,11 +28,12 @@ def prepPipeline():
     return pipe
 
 
-def generate(prompt: str):
+def generate(prompt: str, height: int, width: int, steps: int):
     pipe = prepPipeline()
 
     with autocast("cuda"):
-        output = pipe(prompt, height=1024, width=1024)
+        output = pipe(prompt, height=height, width=width,
+                      num_inference_steps=steps)
     for image in output.images:
         # base64 encode image
         buffered = BytesIO()
