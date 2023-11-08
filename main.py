@@ -30,6 +30,11 @@ def generate_handler():
     }
 
 
+@app.route("/system-status", methods=['GET'])
+def get_status():
+    return {"msg": "System is running"}, 200
+
+
 def main():
     app.run()
 
