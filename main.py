@@ -1,4 +1,5 @@
 from flask import Flask, request
+import flask
 from src.generate import generate
 
 
@@ -12,6 +13,7 @@ def generate_handler():
     width = request.args.get("w")
     steps = request.args.get("s")
 
+
     if height == None:
         height = 512
 
@@ -24,10 +26,14 @@ def generate_handler():
     if not prompt:
         return "Missing prompt", 400
 
-    return {
+    res = flask.jsonify({
         "prompt": prompt,
         "image": generate(prompt, int(height), int(width), int(steps)),
-    }
+    })
+
+    res.headers.add('Access-Control-Allow-Origin', '*')
+    
+    return res
 
 
 @app.route("/system-status", methods=['GET'])
